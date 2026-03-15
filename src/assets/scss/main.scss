@@ -17,3 +17,10 @@ html {
 *::after {
   box-sizing: inherit;
 }
+
+input,
+textarea,
+.el-input__inner,
+.el-textarea__inner {
+  font-size: 16px !important;
+}
