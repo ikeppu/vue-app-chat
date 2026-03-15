@@ -13,14 +13,15 @@ const { messageText, error, send } = useMessageSender(chatId);
 const messagesContainer = ref<HTMLElement | null>(null);
 const isLoading = ref<boolean>(true);
 
- onMounted(() => {
+onMounted(() => {
   setTimeout(() => {
     isLoading.value = false;
 
     if (!currentChat.value) {
-      router.push({ name: 'Home' });
+      router.push({ name: "Home" });
     }
-}, 400);
+  }, 400);
+});
 
 const scrollToBottom = async () => {
   await nextTick();
