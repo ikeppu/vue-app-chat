@@ -29,7 +29,9 @@ watch(
 <template>
   <div class="chat" v-if="currentChat">
     <header class="chat__header">
-      <el-button class="chat__btn-back" @click="router.push({ name: 'Home' })" circle text> ❮ </el-button>
+      <el-button class="chat__btn-back" @click="router.push({ name: 'Home' })" circle text>
+        ❮
+      </el-button>
       <el-avatar :size="40" class="chat__avatar">
         {{ currentChat.name.charAt(0) }}
       </el-avatar>
@@ -120,6 +122,7 @@ watch(
   &__messages {
     flex: 1;
     padding: 20px;
+    min-height: 0;
     overflow-y: auto;
     display: flex;
     flex-direction: column;
@@ -128,7 +131,7 @@ watch(
   }
 
   &__input-area {
-    padding: 20px 20px 0;
+    padding: 15px 20px calc(15px + env(safe-area-inset-bottom));
     background-color: $c-bg-main;
     border-top: 1px solid $c-border;
 

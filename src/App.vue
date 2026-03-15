@@ -22,7 +22,7 @@ const route = useRoute();
 <style lang="scss" scoped>
 .app {
   display: flex;
-  height: 100vh;
+  height: 100dvh;
   width: 100vw;
   background-color: $c-bg-main;
   position: relative;

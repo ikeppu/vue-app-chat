@@ -78,7 +78,7 @@ onMounted(() => {
   border-right: 1px solid $c-border;
   display: flex;
   flex-direction: column;
-  height: 100vh;
+  height: 100dvh;
   z-index: $z-sidebar;
 
   transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
