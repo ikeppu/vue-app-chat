@@ -1,0 +1,18 @@
+@use "variables" as *;
+@use "mixins" as *;
+
+body,
+html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  overflow: hidden;
+  color: $c-text-main;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: inherit;
+}

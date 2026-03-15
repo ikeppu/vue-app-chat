@@ -1,0 +1,24 @@
+@mixin respond-to($max-width) {
+  @media (max-width: $max-width) {
+    @content;
+  }
+}
+
+@mixin flex-center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@mixin text-ellipsis {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+@mixin reset-button {
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+}
