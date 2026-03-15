@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { ref, watch, nextTick } from "vue";
+import { ref, watch, nextTick, onMounted } from "vue";
 import { useRouter } from "vue-router";
 import { useCurrentChat } from "@/composables/useCurrentChat";
 import { useMessageSender } from "@/composables/useMessageSender";
@@ -11,6 +11,16 @@ const { chatId, chat: currentChat } = useCurrentChat();
 const { messageText, error, send } = useMessageSender(chatId);
 
 const messagesContainer = ref<HTMLElement | null>(null);
+const isLoading = ref<boolean>(true);
+
+ onMounted(() => {
+  setTimeout(() => {
+    isLoading.value = false;
+
+    if (!currentChat.value) {
+      router.push({ name: 'Home' });
+    }
+}, 400);
 
 const scrollToBottom = async () => {
   await nextTick();
@@ -27,7 +37,20 @@ watch(
 </script>
 
 <template>
-  <div class="chat" v-if="currentChat">
+  <div v-if="isLoading" class="chat chat--loading">
+    <header class="chat__header">
+      <el-skeleton-item variant="circle" style="width: 40px; height: 40px; margin-right: 15px" />
+      <div style="flex: 1">
+        <el-skeleton-item variant="text" style="width: 30%; margin-bottom: 5px" />
+        <el-skeleton-item variant="text" style="width: 15%" />
+      </div>
+    </header>
+    <div class="chat__messages" style="padding: 20px">
+      <el-skeleton :rows="5" animated />
+    </div>
+  </div>
+
+  <div class="chat" v-else-if="currentChat">
     <header class="chat__header">
       <el-button class="chat__btn-back" @click="router.push({ name: 'Home' })" circle text>
         ❮
@@ -82,6 +105,14 @@ watch(
   height: 100%;
   width: 100%;
 
+  /* Стили для режима загрузки */
+  &--loading {
+    background-color: $c-bg-main;
+    .chat__header {
+      border-bottom: 1px solid $c-border;
+    }
+  }
+
   &__header {
     padding: 15px 20px;
     border-bottom: 1px solid $c-border;
@@ -128,6 +159,7 @@ watch(
     flex-direction: column;
     gap: 15px;
     background-color: $c-bg-sidebar;
+    -webkit-overflow-scrolling: touch; /* Для плавного скролла на iOS */
   }
 
   &__input-area {
